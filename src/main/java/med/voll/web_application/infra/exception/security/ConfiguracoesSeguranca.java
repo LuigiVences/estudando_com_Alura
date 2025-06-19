@@ -58,8 +58,9 @@ public class ConfiguracoesSeguranca {
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login?logout")
                         .permitAll())
-                .rememberMe(rememberMe -> rememberMe
-                        .key("rememberMe"))
+                //.rememberMe(rememberMe -> rememberMe
+                        //.key("rememberMe")
+                        //.alwaysRemember(true))
                 .build();
     }
 }
