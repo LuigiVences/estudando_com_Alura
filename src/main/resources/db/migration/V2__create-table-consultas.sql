@@ -1,11 +1,8 @@
-create table consultas(
-
-    id bigint not null auto_increment,
-    medico_id bigint not null,
-    paciente varchar(100) not null,
-    data datetime not null,
-
-    primary key(id),
-    constraint fk_consultas_medico_id foreign key(medico_id) references medicos(id)
-
+CREATE TABLE consultas (
+	id bigserial NOT NULL,
+	paciente varchar NOT NULL,
+	"data" timestamp NOT NULL,
+	medico_id bigint NULL,
+	CONSTRAINT consultas_pk PRIMARY KEY (id),
+	CONSTRAINT consultas_medicos_fk FOREIGN KEY (medico_id) REFERENCES public.medicos(id)
 );
