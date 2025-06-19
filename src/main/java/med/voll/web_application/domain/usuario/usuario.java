@@ -1,11 +1,11 @@
-package med.voll.web_application.domain;
+package med.voll.web_application.domain.usuario;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
+
 @Entity
 @Table(name="usuarios")
 public class usuario implements UserDetails {
