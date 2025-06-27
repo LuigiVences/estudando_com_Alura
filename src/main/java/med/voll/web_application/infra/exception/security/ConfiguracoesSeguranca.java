@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -26,25 +28,7 @@ public class ConfiguracoesSeguranca {
     //A criação dessa bean é para dizer ao spring que ñ queremos mais usar a o AutoConfiguration
     //UserDatailService (o usuário e a senha gerada pelo spring). Vamos criar o nosso proprio
     //UserDetailService
-    @Bean
-    public UserDetailsService dadosUsuariosCadastrados(){
-        UserDetails usuario1 = User.builder()
-                .username("joao@email.com")
-                .password("{noop}joao123")
-                .build();
-        UserDetails usuario2 = User.builder()
-                .username("maria@email.com")
-                .password("{noop}maria123")
-                .build();
-        UserDetails usuario3 = User.builder()
-                .username("luiz@email.com")
-                .password("{noop}luiz123")
-                .build();
-        //Nesse momento não vamos trabalhar com BD. Por esse motivo criamos os usuários
-        // e esses serão armazenados na memória
-        return new InMemoryUserDetailsManager(usuario1, usuario2, usuario3);
 
-    }
 
     @Bean
     public SecurityFilterChain filtrosSeguranca(HttpSecurity http) throws Exception {
@@ -62,5 +46,10 @@ public class ConfiguracoesSeguranca {
                         //.key("rememberMe")
                         //.alwaysRemember(true))
                 .build();
+    }
+
+    @Bean
+    public PasswordEncoder codificadorSenha(){
+        return new BCryptPasswordEncoder();
     }
 }
