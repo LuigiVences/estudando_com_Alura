@@ -2,6 +2,7 @@ package med.voll.web_application.infra.exception.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -33,7 +34,7 @@ public class ConfiguracoesSeguranca {
     @Bean
     public SecurityFilterChain filtrosSeguranca(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(req->{
-                        req.requestMatchers("/css/**", "/js/**", "/assets/**").permitAll();
+                        req.requestMatchers("/css/**", "/js/**", "/assets/**", "/", "/index", "/home").permitAll();
                         req.anyRequest().authenticated();
                 })
                 .formLogin(form ->form.loginPage("/login")
@@ -45,6 +46,7 @@ public class ConfiguracoesSeguranca {
                 //.rememberMe(rememberMe -> rememberMe
                         //.key("rememberMe")
                         //.alwaysRemember(true))
+                .csrf(Customizer.withDefaults())
                 .build();
     }
 
